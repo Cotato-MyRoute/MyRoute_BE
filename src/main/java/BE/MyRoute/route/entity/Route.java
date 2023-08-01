@@ -1,7 +1,6 @@
 package BE.MyRoute.route.entity;
 
 import BE.MyRoute.member.entity.Member;
-import BE.MyRoute.shop.entity.Shop;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,10 +23,6 @@ public class Route {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_memberId", nullable = false)
     private Member member;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shop_shopId", nullable = false)
-    private Shop shop;
 
     private String routeName;
     private Long likeNum;
