@@ -1,5 +1,6 @@
 package BE.MyRoute.route.entity;
 
+import BE.MyRoute.member.entity.Member;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,15 +22,15 @@ public class RouteLike {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_memberId", nullable = false)
     @Column
-    private Long memberId;
+    private Member memberId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "route_routeId", nullable = false)
     @Column
-    private Long routeId;
+    private Route routeId;
 
     @Builder
-    public RouteLike(Long memberId, Long routeId) {
+    public RouteLike(Member memberId, Route routeId) {
         this.memberId = memberId;
         this.routeId = routeId;
     }

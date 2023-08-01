@@ -1,5 +1,6 @@
 package BE.MyRoute.route.entity;
 
+import BE.MyRoute.shop.entity.Shop;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,15 +22,15 @@ public class RouteShop {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "route_routeId", nullable = false)
     @Column
-    private Long routeId;
+    private Route routeId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shop_shopId", nullable = false)
     @Column
-    private Long shopId;
+    private Shop shopId;
 
     @Builder
-    public RouteShop(Long routeId, Long shopId) {
+    public RouteShop(Route routeId, Shop shopId) {
         this.routeId = routeId;
         this.shopId = shopId;
     }

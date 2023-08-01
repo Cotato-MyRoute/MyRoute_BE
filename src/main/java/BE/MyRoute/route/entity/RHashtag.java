@@ -21,13 +21,13 @@ public class RHashtag {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "route_routeId", nullable = false)
     @Column
-    private Long routeId;
+    private Route routeId;
 
     @Column
     private String hashtag;
 
     @Builder
-    public RHashtag(Long routeId, String hashtag) {
+    public RHashtag(Route routeId, String hashtag) {
         this.routeId = routeId;
         this.hashtag = hashtag;
     }
