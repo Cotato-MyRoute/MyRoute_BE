@@ -1,7 +1,6 @@
 package BE.MyRoute.route.entity;
 
 import BE.MyRoute.member.entity.Member;
-import BE.MyRoute.shop.entity.Shop;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
