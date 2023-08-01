@@ -5,18 +5,18 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShopInfo {
+public class ShopInfo implements Serializable {
 
     @Id
-    @OneToOne(fetch = LAZY)
-    @JoinColumn(name = "shopId")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shop_shopId")
     private Shop shop;
 
     @Column(nullable = false)

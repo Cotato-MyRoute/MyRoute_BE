@@ -19,7 +19,6 @@ public class Route {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_memberId", nullable = false)
-    @Column
     private Member member;
 
     @Column

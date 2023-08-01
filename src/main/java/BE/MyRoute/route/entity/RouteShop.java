@@ -21,12 +21,10 @@ public class RouteShop {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "route_routeId", nullable = false)
-    @Column
     private Route routeId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shop_shopId", nullable = false)
-    @Column
     private Shop shopId;
 
     @Builder

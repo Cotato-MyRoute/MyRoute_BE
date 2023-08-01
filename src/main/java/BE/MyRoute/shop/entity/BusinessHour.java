@@ -31,5 +31,5 @@ public class BusinessHour {
 
     @Enumerated(value = EnumType.STRING)
     @Column (nullable = false)
-    private Day day; // 오픈 요일
+    private Day openDay; // 오픈 요일
 }

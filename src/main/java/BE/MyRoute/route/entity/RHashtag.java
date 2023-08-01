@@ -20,7 +20,6 @@ public class RHashtag {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "route_routeId", nullable = false)
-    @Column
     private Route routeId;
 
     @Column
