@@ -25,10 +25,6 @@ public class Route {
     @JoinColumn(name = "member_memberId", nullable = false)
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shop_shopId", nullable = false)
-    private Shop shop;
-
     private String routeName;
     private Long likeNum;
 }
