@@ -20,7 +20,7 @@ public class Route {
     private Long routeId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_memberId", nullable = false)
+    @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
     @Column
@@ -29,16 +29,16 @@ public class Route {
     @Column
     private Long likeNum;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "route", cascade = CascadeType.ALL)
     private final List<RHashtag> rHashtagList = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "route", cascade = CascadeType.ALL)
     private final List<RouteLike> routeLikeList = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(mappedBy = "route")
     private final List<RouteImage> routeImageList = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "route", cascade = CascadeType.ALL)
     private final List<RouteShop> routeShopList = new ArrayList<>();
 
     @Builder

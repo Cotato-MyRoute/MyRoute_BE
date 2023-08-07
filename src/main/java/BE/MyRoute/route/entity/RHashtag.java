@@ -19,15 +19,15 @@ public class RHashtag {
     private Long rHashTagId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "route_routeId", nullable = false)
-    private Route routeId;
+    @JoinColumn(name = "route_id", nullable = false)
+    private Route route;
 
     @Column
     private String hashtag;
 
     @Builder
-    public RHashtag(Route routeId, String hashtag) {
-        this.routeId = routeId;
+    public RHashtag(Route route, String hashtag) {
+        this.route = route;
         this.hashtag = hashtag;
     }
 }

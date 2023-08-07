@@ -20,16 +20,16 @@ public class RouteShop {
     private Long rShopId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "route_routeId", nullable = false)
-    private Route routeId;
+    @JoinColumn(name = "route_id", nullable = false)
+    private Route route;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shop_shopId", nullable = false)
-    private Shop shopId;
+    @JoinColumn(name = "shop_id", nullable = false)
+    private Shop shop;
 
     @Builder
-    public RouteShop(Route routeId, Shop shopId) {
-        this.routeId = routeId;
-        this.shopId = shopId;
+    public RouteShop(Route route, Shop shop) {
+        this.route = route;
+        this.shop = shop;
     }
 }
