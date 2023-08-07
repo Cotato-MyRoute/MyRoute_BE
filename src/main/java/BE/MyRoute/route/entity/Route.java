@@ -5,6 +5,8 @@ import BE.MyRoute.shop.entity.Shop;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "route")
@@ -26,6 +28,18 @@ public class Route {
 
     @Column
     private Long likeNum;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private final List<RHashtag> rHashtagList = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private final List<RouteLike> routeLikeList = new ArrayList<>();
+
+    @OneToMany
+    private final List<RouteImage> routeImageList = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private final List<RouteShop> routeShopList = new ArrayList<>();
 
     @Builder
     public Route(Member member, String routeName) {
