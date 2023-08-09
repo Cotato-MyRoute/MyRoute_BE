@@ -33,6 +33,12 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc' // Jdbc, Driver
 	implementation 'com.h2database:h2' // h2 : implementation
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	//security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	//spring-session-jdbc
+//	implementation 'org.springframework.session:spring-session-jdbc'	// spring session 장소는 jdbc로 설정
+
 }
 
 tasks.named('test') {

@@ -26,14 +26,18 @@ public class Member {
     private String nickname;
 
     @Column
+    private String profileImage;
+
+    @Column
     @Enumerated(EnumType.STRING)
     private Role role;
 
     @Builder
-    public Member(String email, String password, String nickname, Role role) {
+    public Member(String email, String password, String nickname, String profileImage, Role role) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
+        this.profileImage = profileImage;
         this.role = role;
     }
 }
