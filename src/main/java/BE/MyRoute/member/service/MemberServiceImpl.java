@@ -38,7 +38,7 @@ public class MemberServiceImpl implements MemberService{
                 .email(email)
                 .nickname(nickname)
                 .password(encPassword)
-                .profileImage(profileImage == null ? "기본이미지URL" : profileImage.get())
+                .profileImage(profileImage.isEmpty() ? "기본이미지URL" : profileImage.get())
                 .role(role.isEmpty() ? Role.ROLE_USER: Role.valueOf(role.get())) // 기본값 ROLE_USER(일반사용자). (ADMIN등록 시, ROLE_ADMIN으로 등록)
                 .build());
     }

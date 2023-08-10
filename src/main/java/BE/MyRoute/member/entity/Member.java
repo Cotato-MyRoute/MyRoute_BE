@@ -25,7 +25,7 @@ public class Member {
     @Column
     private String nickname;
 
-    @Column
+    @Column(name = "profile_image")
     private String profileImage;
 
     @Column

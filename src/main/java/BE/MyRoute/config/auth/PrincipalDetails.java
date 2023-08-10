@@ -6,20 +6,19 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-@NoArgsConstructor
 @Data
+@NoArgsConstructor
 @Slf4j
-public class UserDetailsImpl implements UserDetails {
+public class PrincipalDetails implements UserDetails {
 
     private Member member;
 
     // 일반 사용자를 위한 생성자
-    public UserDetailsImpl(Member member) {
+    public PrincipalDetails(Member member) {
         this.member = member;
     }
 
@@ -43,7 +42,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {
-        return member.getEmail();
+        return member.getNickname();
     }
 
     @Override
