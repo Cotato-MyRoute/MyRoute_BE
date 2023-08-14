@@ -22,7 +22,7 @@ public class Shop {
     private Double lat;
     private Double lon;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private ShopType shopType;
     private Long likeNum;
 }

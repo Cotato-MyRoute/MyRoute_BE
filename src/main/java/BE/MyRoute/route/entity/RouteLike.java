@@ -20,16 +20,16 @@ public class RouteLike {
     private Long sLikeId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_memberId", nullable = false)
-    private Member memberId;
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "route_routeId", nullable = false)
-    private Route routeId;
+    @JoinColumn(name = "route_id", nullable = false)
+    private Route route;
 
     @Builder
-    public RouteLike(Member memberId, Route routeId) {
-        this.memberId = memberId;
-        this.routeId = routeId;
+    public RouteLike(Member member, Route route) {
+        this.member = member;
+        this.route = route;
     }
 }
