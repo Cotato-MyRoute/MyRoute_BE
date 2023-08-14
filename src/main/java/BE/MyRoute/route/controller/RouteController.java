@@ -29,7 +29,7 @@ public class RouteController {
                 .body("route is saved");
     }
 
-    @GetMapping("/shop/{routeId}/{shopId}")
+    @PostMapping("/shop/{routeId}/{shopId}")
     public ResponseEntity<String> addShopToRoute(@PathVariable Long routeId,
                                                  @PathVariable Long shopId){
 
