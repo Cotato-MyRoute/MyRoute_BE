@@ -16,7 +16,7 @@ public class RHashtag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Long rHashTagId;
+    private Long rHashtagId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "route_id", nullable = false)
