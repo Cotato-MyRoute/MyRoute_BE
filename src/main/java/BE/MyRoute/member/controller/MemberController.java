@@ -20,6 +20,9 @@ public class MemberController {
     @PostMapping("/member/register")
     public ResponseEntity<?> memberRegister(@RequestBody MemberDto.SignUpRequest request) {
         log.info("회원가입 요청 : {}", request.getEmail());
+        //이메일 인증 프로세스
+
+
         memberService.memberRegister(request);
 
         return ResponseEntity.ok().build();
