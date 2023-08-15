@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/v1")
 @Slf4j
 public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping("/member/register")
+    @PostMapping("/register")
     public ResponseEntity<?> memberRegister(@RequestBody MemberDto.SignUpRequest request) {
         log.info("회원가입 요청 : {}", request.getEmail());
         memberService.memberRegister(request);
-
         return ResponseEntity.ok().build();
     }
 

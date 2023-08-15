@@ -30,17 +30,26 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
-//	implementation 'org.springframework.boot:spring-boot-starter-jdbc' // Jdbc, Driver
-//	implementation 'com.h2database:h2' // h2 : implementation
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc' // Jdbc, Driver
+	implementation 'com.h2database:h2' // h2 : implementation
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	//security
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	testImplementation 'org.springframework.security:spring-security-test'
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client' // 승인된 리디렉션 URI를 낚아채줌
-	implementation 'org.springframework.boot:spring-boot-starter-mustache'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
+	//spring email
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+	//thymeleaf
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+	//SpringTemplateEngine 객체 사용을 위한 의존성 추가
+	implementation 'org.thymeleaf:thymeleaf-spring5'
+
+	//redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
 
 
