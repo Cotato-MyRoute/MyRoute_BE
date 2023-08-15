@@ -12,13 +12,14 @@ import java.io.UnsupportedEncodingException;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/login")
+@RequestMapping("/v1/mail")
 @Slf4j
 public class EmailController {
 
     private final EmailService emailService;
 
-    @GetMapping("/sendMail")
+    // 이메일 인증코드 전송
+    @GetMapping
     public ResponseEntity<?> sendEmailPath(@RequestBody EmailDto.sendEmailRequest request) throws MessagingException,UnsupportedEncodingException {
         log.info("이메일 전송 요청 : {}", request);
         /*이메일 주소를 받아 EmailService의 sendEmail메소드로 연결*/
@@ -26,7 +27,8 @@ public class EmailController {
         return ResponseEntity.ok("이메일을 확인하세요.");
     }
 
-    @PostMapping("/mailConfirm")
+    // 이메일 인증코드 검증
+    @PostMapping
     public ResponseEntity<?> mailConfirm(@RequestBody EmailDto.mailConfirmRequest request) throws MessagingException, UnsupportedEncodingException {
 
         if(emailService.verifyEmailCode(request.getEmail(),request.getCode())){
