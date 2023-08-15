@@ -48,7 +48,8 @@ dependencies {
 	//SpringTemplateEngine 객체 사용을 위한 의존성 추가
 	implementation 'org.thymeleaf:thymeleaf-spring5'
 
-
+	//redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
 
 
