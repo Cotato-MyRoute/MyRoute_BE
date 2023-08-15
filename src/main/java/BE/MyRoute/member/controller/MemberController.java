@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/v1")
 @Slf4j
 public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping("/member/register")
+    @PostMapping("/register")
     public ResponseEntity<?> memberRegister(@RequestBody MemberDto.SignUpRequest request) {
         log.info("회원가입 요청 : {}", request.getEmail());
         //이메일 인증 프로세스

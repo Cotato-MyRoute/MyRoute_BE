@@ -15,4 +15,9 @@ public interface EmailService {
     // 실제 메일을 전송하는 기능
     public String sendEmail(String toEmail) throws MessagingException, UnsupportedEncodingException ;
 
+    // 인증코드 검증
+    public boolean verifyEmailCode(String email,String code);
+
+    //
+
 }
