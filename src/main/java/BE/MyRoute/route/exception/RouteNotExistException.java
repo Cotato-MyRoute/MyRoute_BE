@@ -1,7 +1,7 @@
 package BE.MyRoute.route.exception;
 
-public class RouteNotExistException extends Exception{
+public class RouteNotExistException extends RuntimeException{
     public RouteNotExistException() {
-        super("Route Not Exist");
+        super("Route Is Not Exist");
     }
 }

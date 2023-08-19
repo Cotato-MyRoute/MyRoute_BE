@@ -8,6 +8,9 @@ import BE.MyRoute.route.entity.RHashtag;
 import BE.MyRoute.route.entity.Route;
 import BE.MyRoute.route.entity.RouteImage;
 import BE.MyRoute.route.entity.RouteShop;
+import BE.MyRoute.route.exception.MemberNotExistException;
+import BE.MyRoute.route.exception.RouteNotExistException;
+import BE.MyRoute.route.exception.ShopNotExistException;
 import BE.MyRoute.route.repository.RHashtagRepository;
 import BE.MyRoute.route.repository.RouteImageRepository;
 import BE.MyRoute.route.repository.RouteRepository;
@@ -37,7 +40,9 @@ public class RouteServiceImpl implements RouteService{
     @Override
     public boolean saveRoute(RouteInitRequestDto requestDto) {
 
-        Member member = memberRepository.findById(requestDto.getMemberId()).get();
+        Member member = memberRepository
+                .findById(requestDto.getMemberId())
+                .orElseThrow(MemberNotExistException::new);
 
         Route route = Route.builder()
                 .routeName(requestDto.getRouteName())
@@ -75,8 +80,12 @@ public class RouteServiceImpl implements RouteService{
     @Override
     public void addShopToRoute(Long routeId, Long shopId) {
 
-        Route route = routeRepository.findById(routeId).get();
-        Shop shop = shopRepository.findById(shopId).get();
+        Route route = routeRepository
+                .findById(routeId)
+                .orElseThrow(RouteNotExistException::new);
+        Shop shop = shopRepository
+                .findById(shopId)
+                .orElseThrow(ShopNotExistException::new);
 
         RouteShop routeShop = RouteShop.builder()
                                     .shop(shop)
@@ -100,7 +109,9 @@ public class RouteServiceImpl implements RouteService{
     @Override
     public RouteResponseDto loadRouteInfo(Long routeId) {
 
-        Route route = routeRepository.findById(routeId).get();
+        Route route = routeRepository
+                .findById(routeId)
+                .orElseThrow(RouteNotExistException::new);
 
         List<Long> routeShopIdList = route.getRouteShopList()
                 .stream()
@@ -128,6 +139,8 @@ public class RouteServiceImpl implements RouteService{
 
     @Override
     public void deleteRoute(Long routeId) {
-        routeRepository.delete(routeRepository.findById(routeId).get());
+        routeRepository.delete(routeRepository
+                .findById(routeId)
+                .orElseThrow(RouteNotExistException::new));
     }
 }
