@@ -19,10 +19,12 @@ public class Shop {
     private Long shopId;
 
     private String shopName;
+    private String address;
     private Double lat;
     private Double lon;
 
     @Enumerated
     private ShopType shopType;
+    private String link;
     private Long likeNum;
 }
