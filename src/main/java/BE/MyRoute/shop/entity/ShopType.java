@@ -23,7 +23,15 @@ public enum ShopType {
     SHOWROOM("쇼룸"),
     VINTAGE("빈티지"),
     BOUTIQUE("편집샵"),
-    ACCESSORIES("의류액세서리");
+    ACCESSORIES("액세서리");
 
     private final String description;
+    public static ShopType toEnum(String description) {
+        for (ShopType shopType : values()) {
+            if (shopType.getDescription().equals(description)) {
+                return shopType;
+            }
+        }
+        throw new IllegalArgumentException("Invalid description: " + description);
+    }
 }
