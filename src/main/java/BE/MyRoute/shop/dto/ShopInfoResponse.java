@@ -27,11 +27,11 @@ public class ShopInfoResponse {
 
     private String open;
     private String close;
+    private List<String> days;
 
-    private List<Day> days;
     private List<String> images;
 
-    public ShopInfoResponse(Shop shop, BusinessHour businessHour, List<String> hashtags, List<Day> days, List<String> images) {
+    public ShopInfoResponse(Shop shop, BusinessHour businessHour, List<String> hashtags, List<String> days, List<String> images) {
         this.shopId = shop.getShopId();
         this.shopName = shop.getShopName();
         this.address = shop.getAddress();

@@ -73,11 +73,21 @@ public class ShopService {
 
     public ShopInfoResponse getShopInfo(Long shopId) {
         Shop shop = shopRepository.findById(shopId).get();
-        BusinessHour businessHour = (BusinessHour) new Object();
+
         List<String> hashtags = new ArrayList<>();
-        List<Day> days = new ArrayList<>();
+        List<SHashtag> sHashtags = sHashtagRepository.findAllByShop(shop);
+        sHashtags.forEach(h -> hashtags.add(h.getHashtag()));
+
+
+        List<String> days = new ArrayList<>();
+        List<BusinessHour> businessHours = businessHourRepository.findAllByShop(shop);
+        businessHours.forEach(b -> days.add(b.getOpenDay().getDay()));
+
         List<String> images = new ArrayList<>();
-        return new ShopInfoResponse(shop, businessHour, hashtags, days, images);
+        List<ShopImage> shopImages = shopImageRepository.findAllByShop(shop);
+        shopImages.forEach(i -> images.add(i.getImageUrl()));
+
+        return new ShopInfoResponse(shop, businessHours.get(0), hashtags, days, images);
     }
 
     public List<ShopResponse> getShopByName(String shopName, Authentication auth) {
