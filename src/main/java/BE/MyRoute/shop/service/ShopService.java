@@ -83,6 +83,8 @@ public class ShopService {
 
         shopLikeRepository.deleteByMemberAndShop(targetMember, targetShop);
 
+        targetShop.dislike();
+
         return "상점 좋아요 취소 완료: shopId =" + shopId;
     }
 }
