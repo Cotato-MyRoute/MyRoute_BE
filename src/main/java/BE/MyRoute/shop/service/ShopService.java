@@ -4,6 +4,7 @@ import BE.MyRoute.member.entity.Member;
 import BE.MyRoute.shop.dto.ShopRequest;
 import BE.MyRoute.shop.dto.ShopInfoResponse;
 import BE.MyRoute.shop.dto.ShopResponse;
+import BE.MyRoute.shop.dto.SimpleShopResponse;
 import BE.MyRoute.shop.entity.*;
 import BE.MyRoute.shop.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,8 +27,8 @@ public class ShopService {
     private final ShopLikeRepository shopLikeRepository;
 
     @Transactional
-    public String addNewShop(ShopRequest shopRequest, Authentication authentication) {
-        PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
+    public String addNewShop(ShopRequest shopRequest, Authentication auth) {
+        PrincipalDetails principalDetails = (PrincipalDetails) auth.getPrincipal();
         Member savedMember = principalDetails.getMember();
 
         Shop savedShop = shopRepository.save(shopRequest.newShopEntity());
@@ -54,7 +56,7 @@ public class ShopService {
         return "상점 좋아요 완료: sLikeId =" + shopLike.getSLikeId();
     }
 
-    public List<ShopResponse> getNewShops() {
+    public List<ShopResponse> getNewShops(Authentication auth) {
         List<ShopResponse> result = new ArrayList<>();
 
         PrincipalDetails principalDetails = (PrincipalDetails) auth.getPrincipal();
@@ -78,7 +80,7 @@ public class ShopService {
         return new ShopInfoResponse(shop, businessHour, hashtags, days, images);
     }
 
-    public List<ShopResponse> getShopByName(String shopName) {
+    public List<ShopResponse> getShopByName(String shopName, Authentication auth) {
         List<ShopResponse> result = new ArrayList<>();
 
         PrincipalDetails principalDetails = (PrincipalDetails) auth.getPrincipal();
@@ -93,8 +95,9 @@ public class ShopService {
         return result;
     }
 
-    public List<ShopResponse> getAllShops() {
-        return null;
+    public List<SimpleShopResponse> getAllShops() {
+        List<Shop> shops = shopRepository.findAll();
+        return shops.stream().map(SimpleShopResponse::new).collect(Collectors.toList());
     }
 
     @Transactional

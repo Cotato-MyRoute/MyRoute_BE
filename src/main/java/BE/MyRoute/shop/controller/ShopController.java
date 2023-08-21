@@ -3,6 +3,7 @@ package BE.MyRoute.shop.controller;
 import BE.MyRoute.shop.dto.ShopRequest;
 import BE.MyRoute.shop.dto.ShopInfoResponse;
 import BE.MyRoute.shop.dto.ShopResponse;
+import BE.MyRoute.shop.dto.SimpleShopResponse;
 import BE.MyRoute.shop.service.ShopService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,8 +31,8 @@ public class ShopController {
     }
 
     @GetMapping("/new")
-    public ResponseEntity<List<ShopResponse>> getNewShops(){
-        return ResponseEntity.status(HttpStatus.OK).body(shopService.getNewShops());
+    public ResponseEntity<List<ShopResponse>> getNewShops(Authentication auth){
+        return ResponseEntity.status(HttpStatus.OK).body(shopService.getNewShops(auth));
     }
 
     @GetMapping("/info/{shopId}")
@@ -40,12 +41,12 @@ public class ShopController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ShopResponse>> getShopByName(@RequestParam String shopName){
-        return ResponseEntity.status(HttpStatus.OK).body(shopService.getShopByName(shopName));
+    public ResponseEntity<List<ShopResponse>> getShopByName(@RequestParam String shopName, Authentication auth){
+        return ResponseEntity.status(HttpStatus.OK).body(shopService.getShopByName(shopName, auth));
     }
 
     @GetMapping
-    public ResponseEntity<List<ShopResponse>> getAllShops(){
+    public ResponseEntity<List<SimpleShopResponse>> getAllShops(){
         return ResponseEntity.status(HttpStatus.OK).body(shopService.getAllShops());
     }
 
