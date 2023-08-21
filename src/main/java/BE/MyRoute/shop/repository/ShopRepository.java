@@ -12,4 +12,5 @@ public interface ShopRepository extends JpaRepository<Shop, Long> {
     List<Shop> findTop10BySaveDateAsc();
 
     boolean existsByMemberAndShop(Member member, Shop shop);
+    List<Shop> findByShopNameContaining(String searchShopName);
 }

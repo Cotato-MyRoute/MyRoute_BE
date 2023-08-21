@@ -70,11 +70,27 @@ public class ShopService {
     }
 
     public ShopInfoResponse getShopInfo(Long shopId) {
-        return null;
+        Shop shop = shopRepository.findById(shopId).get();
+        BusinessHour businessHour = (BusinessHour) new Object();
+        List<String> hashtags = new ArrayList<>();
+        List<Day> days = new ArrayList<>();
+        List<String> images = new ArrayList<>();
+        return new ShopInfoResponse(shop, businessHour, hashtags, days, images);
     }
 
     public List<ShopResponse> getShopByName(String shopName) {
-        return null;
+        List<ShopResponse> result = new ArrayList<>();
+
+        PrincipalDetails principalDetails = (PrincipalDetails) auth.getPrincipal();
+        Member member = principalDetails.getMember();
+
+        List<Shop> shops = shopRepository.findByShopNameContaining(shopName);
+        shops.forEach(shop -> {
+            boolean isLiked = shopRepository.existsByMemberAndShop(member, shop);
+            result.add(new ShopResponse(shop, isLiked));
+        });
+
+        return result;
     }
 
     public List<ShopResponse> getAllShops() {
