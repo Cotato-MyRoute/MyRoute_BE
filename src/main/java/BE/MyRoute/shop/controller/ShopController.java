@@ -2,6 +2,7 @@ package BE.MyRoute.shop.controller;
 
 import BE.MyRoute.shop.dto.ShopRequest;
 import BE.MyRoute.shop.dto.ShopInfoResponse;
+import BE.MyRoute.shop.dto.ShopResponse;
 import BE.MyRoute.shop.service.ShopService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,7 @@ public class ShopController {
     }
 
     @GetMapping("/new")
-    public ResponseEntity<List<ShopInfoResponse>> getNewShops(){
+    public ResponseEntity<List<ShopResponse>> getNewShops(){
         return ResponseEntity.status(HttpStatus.OK).body(shopService.getNewShops());
     }
 
@@ -39,12 +40,12 @@ public class ShopController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ShopInfoResponse>> getShopByName(@RequestParam String shopName){
+    public ResponseEntity<List<ShopResponse>> getShopByName(@RequestParam String shopName){
         return ResponseEntity.status(HttpStatus.OK).body(shopService.getShopByName(shopName));
     }
 
     @GetMapping
-    public ResponseEntity<List<ShopInfoResponse>> getAllShops(){
+    public ResponseEntity<List<ShopResponse>> getAllShops(){
         return ResponseEntity.status(HttpStatus.OK).body(shopService.getAllShops());
     }
 

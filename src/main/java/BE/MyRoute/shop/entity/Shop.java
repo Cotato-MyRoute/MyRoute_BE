@@ -29,7 +29,7 @@ public class Shop {
     private String address;
     private Double lat;
     private Double lon;
-    private Date current;
+    private Date saveDate;
 
     @Enumerated
     private ShopType shopType;

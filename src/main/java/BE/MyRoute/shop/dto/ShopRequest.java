@@ -2,7 +2,6 @@ package BE.MyRoute.shop.dto;
 
 import BE.MyRoute.member.entity.Member;
 import BE.MyRoute.shop.entity.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -10,7 +9,6 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 public class ShopRequest {
     private String shopName;
     private String seller;
@@ -42,7 +40,7 @@ public class ShopRequest {
                 .shopUrl(shopUrl)
                 .likeNum(0L)
                 .descr(descr)
-                .current(new Date())
+                .saveDate(new Date())
                 .build();
     }
 

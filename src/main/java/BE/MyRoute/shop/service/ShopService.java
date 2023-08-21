@@ -3,6 +3,7 @@ package BE.MyRoute.shop.service;
 import BE.MyRoute.member.entity.Member;
 import BE.MyRoute.shop.dto.ShopRequest;
 import BE.MyRoute.shop.dto.ShopInfoResponse;
+import BE.MyRoute.shop.dto.ShopResponse;
 import BE.MyRoute.shop.entity.*;
 import BE.MyRoute.shop.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -52,19 +54,30 @@ public class ShopService {
         return "상점 좋아요 완료: sLikeId =" + shopLike.getSLikeId();
     }
 
-    public List<ShopInfoResponse> getNewShops() {
-        return null;
+    public List<ShopResponse> getNewShops() {
+        List<ShopResponse> result = new ArrayList<>();
+
+        PrincipalDetails principalDetails = (PrincipalDetails) auth.getPrincipal();
+        Member member = principalDetails.getMember();
+
+        List<Shop> shops = shopRepository.findTop10BySaveDateAsc();
+
+        shops.forEach(shop -> {
+            boolean isLiked = shopRepository.existsByMemberAndShop(member, shop);
+            result.add(new ShopResponse(shop, isLiked));
+        });
+        return result;
     }
 
     public ShopInfoResponse getShopInfo(Long shopId) {
         return null;
     }
 
-    public List<ShopInfoResponse> getShopByName(String shopName) {
+    public List<ShopResponse> getShopByName(String shopName) {
         return null;
     }
 
-    public List<ShopInfoResponse> getAllShops() {
+    public List<ShopResponse> getAllShops() {
         return null;
     }
 
