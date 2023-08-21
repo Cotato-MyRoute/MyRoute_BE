@@ -2,13 +2,14 @@ package BE.MyRoute.shop.service;
 
 import BE.MyRoute.member.entity.Member;
 import BE.MyRoute.shop.dto.ShopRequest;
-import BE.MyRoute.shop.dto.ShopResponse;
+import BE.MyRoute.shop.dto.ShopInfoResponse;
 import BE.MyRoute.shop.entity.*;
 import BE.MyRoute.shop.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -21,24 +22,20 @@ public class ShopService {
     private final ShopImageRepository shopImageRepository;
     private final ShopLikeRepository shopLikeRepository;
 
+    @Transactional
     public String addNewShop(ShopRequest shopRequest, Authentication authentication) {
         PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
         Member savedMember = principalDetails.getMember();
 
         Shop savedShop = shopRepository.save(shopRequest.newShopEntity());
+        businessHourRepository.saveAll(shopRequest.newBHourEntities(savedShop));
+        sHashtagRepository.saveAll(shopRequest.newSHashtagEntities(savedShop));
+        shopImageRepository.saveAll(shopRequest.newShopImageEntity(savedMember, savedShop));
 
-        List<BusinessHour> businessHours = shopRequest.newBHourEntities(savedShop);
-        businessHours.forEach(businessHour -> businessHourRepository.save(businessHour));
-
-        List<SHashtag> sHashtags = shopRequest.newSHashtagEntities(savedShop);
-        sHashtags.forEach(sHashtag->sHashtagRepository.save(sHashtag));
-
-        List<ShopImage> shopImages = shopRequest.newShopImageEntity(savedMember, savedShop);
-        shopImages.forEach(shopImage -> shopImageRepository.save(shopImage));
-
-        return "상점 등록 완료 shopId =" + savedShop.getShopId();
+        return "상점 등록 완료: shopId =" + savedShop.getShopId();
     }
 
+    @Transactional
     public String likeShop(Long shopId, Authentication auth){
         PrincipalDetails principalDetails = (PrincipalDetails) auth.getPrincipal();
         Member targetMember = principalDetails.getMember();
@@ -49,26 +46,43 @@ public class ShopService {
                 .shop(targetShop)
                 .build();
         shopLikeRepository.save(shopLike);
-        return "상점 좋아요 완료 sLikeId =" + shopLike.getSLikeId();
+
+        targetShop.like();
+
+        return "상점 좋아요 완료: sLikeId =" + shopLike.getSLikeId();
     }
 
-    public List<ShopResponse> getNewShops() {
-        return
-    }
-
-    public ShopResponse getShopInfo(Long shopId) {
+    public List<ShopInfoResponse> getNewShops() {
         return null;
     }
 
-    public List<ShopResponse> getShopByName(String shopName) {
+    public ShopInfoResponse getShopInfo(Long shopId) {
         return null;
     }
 
-    public List<ShopResponse> getAllShops() {
+    public List<ShopInfoResponse> getShopByName(String shopName) {
         return null;
     }
 
+    public List<ShopInfoResponse> getAllShops() {
+        return null;
+    }
+
+    @Transactional
     public String deleteShop(Long shopId) {
-        return null;
+        shopRepository.deleteById(shopId);
+        return "상점 삭제 완료: shopId =" + shopId;
+    }
+
+    @Transactional
+    public String dislikeShop(Long shopId, Authentication auth) {
+        PrincipalDetails principalDetails = (PrincipalDetails) auth.getPrincipal();
+        Member targetMember = principalDetails.getMember();
+
+        Shop targetShop = shopRepository.findById(shopId).get();
+
+        shopLikeRepository.deleteByMemberAndShop(targetMember, targetShop);
+
+        return "상점 좋아요 취소 완료: shopId =" + shopId;
     }
 }

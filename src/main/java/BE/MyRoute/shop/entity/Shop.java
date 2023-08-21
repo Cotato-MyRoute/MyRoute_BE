@@ -38,4 +38,12 @@ public class Shop {
 
     @Column(nullable = false)
     private String descr; // 상점 설명
+
+    public void like() {
+        this.likeNum++;
+    }
+
+    public void dislike(){
+        this.likeNum--;
+    }
 }
