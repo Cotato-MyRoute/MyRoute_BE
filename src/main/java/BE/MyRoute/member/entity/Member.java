@@ -17,6 +17,9 @@ public class Member {
     private Long memberId;
 
     @Column
+    private Long snsId;
+
+    @Column
     private String email;
 
     @Column
@@ -30,10 +33,18 @@ public class Member {
     private Role role;
 
     @Builder
-    public Member(String email, String password, String nickname, Role role) {
+    public Member(Long snsId, String email, String password, String nickname, Role role) {
+        this.snsId = snsId;
         this.email = email;
         this.password = password;
         this.nickname = nickname;
         this.role = role;
     }
+
+    public Member update(String nickname) {
+        this.nickname = nickname;
+        return this;
+    }
+
+
 }
