@@ -16,7 +16,12 @@ public enum Day {
 
     private final String day;
 
-    public String getDay() {
-        return day;
+    public static Day toEnum(String day) {
+        for (Day d : values()) {
+            if (d.getDay().equals(day)) {
+                return d;
+            }
+        }
+        throw new IllegalArgumentException("Invalid day: " + day);
     }
 }

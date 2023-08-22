@@ -1,9 +1,13 @@
 package BE.MyRoute.member.entity;
 
 import BE.MyRoute.member.entity.type.Role;
+import BE.MyRoute.shop.entity.ShopImage;
+import BE.MyRoute.shop.entity.ShopLike;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "member")
@@ -31,6 +35,12 @@ public class Member {
     @Column
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<ShopImage> shopImages = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<ShopLike> shopLikes = new ArrayList<>();
 
     @Builder
     public Member(String email, String password, String nickname, String profileImage, Role role) {
