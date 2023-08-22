@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table
@@ -31,13 +33,25 @@ public class Shop {
     private Double lon;
     private Date saveDate;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private ShopType shopType;
     private String shopUrl;
     private Long likeNum;
 
     @Column(nullable = false)
     private String descr; // 상점 설명
+
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.REMOVE)
+    private List<BusinessHour> businessHours = new ArrayList<>();
+
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.REMOVE)
+    private List<SHashtag> sHashtags = new ArrayList<>();
+
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.REMOVE)
+    private List<ShopImage> shopImages = new ArrayList<>();
+
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.REMOVE)
+    private List<ShopLike> shopLikes = new ArrayList<>();
 
     public void like() {
         this.likeNum++;

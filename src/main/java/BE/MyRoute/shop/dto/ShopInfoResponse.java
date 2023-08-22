@@ -1,7 +1,6 @@
 package BE.MyRoute.shop.dto;
 
 import BE.MyRoute.shop.entity.BusinessHour;
-import BE.MyRoute.shop.entity.Day;
 import BE.MyRoute.shop.entity.Shop;
 import BE.MyRoute.shop.entity.ShopType;
 import lombok.Data;

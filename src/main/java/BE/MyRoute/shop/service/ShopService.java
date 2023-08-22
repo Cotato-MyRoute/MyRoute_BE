@@ -1,5 +1,6 @@
 package BE.MyRoute.shop.service;
 
+import BE.MyRoute.config.auth.PrincipalDetails;
 import BE.MyRoute.member.entity.Member;
 import BE.MyRoute.shop.dto.ShopRequest;
 import BE.MyRoute.shop.dto.ShopInfoResponse;
@@ -65,7 +66,7 @@ public class ShopService {
         List<Shop> shops = shopRepository.findTop10BySaveDateAsc();
 
         shops.forEach(shop -> {
-            boolean isLiked = shopRepository.existsByMemberAndShop(member, shop);
+            boolean isLiked = shopLikeRepository.existsByMemberAndShop(member, shop);
             result.add(new ShopResponse(shop, isLiked));
         });
         return result;
@@ -98,7 +99,7 @@ public class ShopService {
 
         List<Shop> shops = shopRepository.findByShopNameContaining(shopName);
         shops.forEach(shop -> {
-            boolean isLiked = shopRepository.existsByMemberAndShop(member, shop);
+            boolean isLiked = shopLikeRepository.existsByMemberAndShop(member, shop);
             result.add(new ShopResponse(shop, isLiked));
         });
 

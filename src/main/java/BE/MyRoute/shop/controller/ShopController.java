@@ -26,7 +26,7 @@ public class ShopController {
     }
 
     @PostMapping("/like/{shopId}")
-    public ResponseEntity<String> likeShop(@RequestParam Long shopId, Authentication auth){
+    public ResponseEntity<String> likeShop(@PathVariable Long shopId, Authentication auth){
         return ResponseEntity.status(HttpStatus.CREATED).body(shopService.likeShop(shopId, auth));
     }
 
@@ -45,7 +45,7 @@ public class ShopController {
         return ResponseEntity.status(HttpStatus.OK).body(shopService.getShopByName(shopName, auth));
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<SimpleShopResponse>> getAllShops(){
         return ResponseEntity.status(HttpStatus.OK).body(shopService.getAllShops());
     }

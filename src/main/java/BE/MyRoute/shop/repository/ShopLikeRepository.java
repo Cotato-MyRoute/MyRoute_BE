@@ -7,4 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ShopLikeRepository extends JpaRepository<ShopLike, Long> {
     void deleteByMemberAndShop(Member targetMember, Shop targetShop);
+    boolean existsByMemberAndShop(Member member, Shop shop);
+
 }
