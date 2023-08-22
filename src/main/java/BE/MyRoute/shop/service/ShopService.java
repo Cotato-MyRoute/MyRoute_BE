@@ -37,7 +37,7 @@ public class ShopService {
         sHashtagRepository.saveAll(shopRequest.newSHashtagEntities(savedShop));
         shopImageRepository.saveAll(shopRequest.newShopImageEntity(savedMember, savedShop));
 
-        return "상점 등록 완료: shopId =" + savedShop.getShopId();
+        return "상점 등록 완료: shopId = " + savedShop.getShopId();
     }
 
     @Transactional
@@ -54,7 +54,7 @@ public class ShopService {
 
         targetShop.like();
 
-        return "상점 좋아요 완료: sLikeId =" + shopLike.getSLikeId();
+        return "상점 좋아요 완료: sLikeId = " + shopLike.getSLikeId();
     }
 
     public List<ShopResponse> getNewShops(Authentication auth) {
@@ -63,7 +63,7 @@ public class ShopService {
         PrincipalDetails principalDetails = (PrincipalDetails) auth.getPrincipal();
         Member member = principalDetails.getMember();
 
-        List<Shop> shops = shopRepository.findTop10BySaveDateAsc();
+        List<Shop> shops = shopRepository.findTop10BySaveDateDesc();
 
         shops.forEach(shop -> {
             boolean isLiked = shopLikeRepository.existsByMemberAndShop(member, shop);
@@ -114,7 +114,7 @@ public class ShopService {
     @Transactional
     public String deleteShop(Long shopId) {
         shopRepository.deleteById(shopId);
-        return "상점 삭제 완료: shopId =" + shopId;
+        return "상점 삭제 완료: shopId = " + shopId;
     }
 
     @Transactional
@@ -128,6 +128,6 @@ public class ShopService {
 
         targetShop.dislike();
 
-        return "상점 좋아요 취소 완료: shopId =" + shopId;
+        return "상점 좋아요 취소 완료: shopId = " + shopId;
     }
 }

@@ -16,7 +16,7 @@ public class ShopInfoResponse {
     private String seller;
     private Double lat;
     private Double lon;
-    private ShopType shopType;
+    private String shopType;
 
     private String shopUrl;
     private String descr; // 상점 설명
@@ -37,7 +37,7 @@ public class ShopInfoResponse {
         this.seller = shop.getSeller();
         this.lat = shop.getLat();
         this.lon = shop.getLon();
-        this.shopType = shop.getShopType();
+        this.shopType = shop.getShopType().getDescription();
         this.shopUrl = shop.getShopUrl();
         this.descr = shop.getDescr();
         this.likeNum = shop.getLikeNum();

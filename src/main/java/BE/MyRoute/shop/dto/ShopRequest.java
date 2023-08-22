@@ -23,8 +23,6 @@ public class ShopRequest {
     private String shopUrl;
     private String descr; // 상점 설명
 
-    private Long likeNum;
-
     private List<String> days;
     private List<String> hashtags;
     private List<String> images;
@@ -46,7 +44,7 @@ public class ShopRequest {
 
     public List<BusinessHour> newBHourEntities(Shop shop) {
         List<BusinessHour> returnDays = new ArrayList<>();
-        days.forEach(d->returnDays.add(BusinessHour.builder()
+        days.forEach(d -> returnDays.add(BusinessHour.builder()
                 .shop(shop)
                 .open(open)
                 .close(close)
@@ -57,7 +55,7 @@ public class ShopRequest {
 
     public List<SHashtag> newSHashtagEntities(Shop shop) {
         List<SHashtag> returnSHashtags = new ArrayList<>();
-        hashtags.forEach(h->returnSHashtags.add(SHashtag.builder()
+        hashtags.forEach(h -> returnSHashtags.add(SHashtag.builder()
                 .shop(shop)
                 .hashtag(h)
                 .build()));
@@ -66,11 +64,11 @@ public class ShopRequest {
 
     public List<ShopImage> newShopImageEntity(Member member, Shop shop) {
         List<ShopImage> shopImages = new ArrayList<>();
-        images.forEach(i -> ShopImage.builder()
+        images.forEach(i -> shopImages.add(ShopImage.builder()
                 .member(member)
                 .shop(shop)
                 .imageUrl(i)
-                .build());
+                .build()));
         return shopImages;
     }
 }
