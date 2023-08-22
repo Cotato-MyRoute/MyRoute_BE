@@ -36,5 +36,5 @@ out/
 ### VS Code ###
 .vscode/
 
-#aws ¼³Á¤ ÆÄÀÏ
+#aws ì„¤ì • íŒŒì¼
 /src/main/resources/application-aws.properties
