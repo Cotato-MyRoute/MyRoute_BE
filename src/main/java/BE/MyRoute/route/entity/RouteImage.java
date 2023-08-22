@@ -20,20 +20,20 @@ public class RouteImage {
     private Long rImageId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_memberId", nullable = false)
-    private Member memberId;
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "route_routeId", nullable = false)
-    private Route routeId;
+    @JoinColumn(name = "route_id", nullable = false)
+    private Route route;
 
     @Column
     private String imageUrl;
 
     @Builder
-    public RouteImage(Member memberId, Route routeId, String imageUrl) {
-        this.memberId = memberId;
-        this.routeId = routeId;
+    public RouteImage(Member member, Route route, String imageUrl) {
+        this.member = member;
+        this.route = route;
         this.imageUrl = imageUrl;
     }
 }
