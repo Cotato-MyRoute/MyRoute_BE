@@ -11,6 +11,5 @@ public interface ShopRepository extends JpaRepository<Shop, Long> {
     @Query("SELECT s FROM Shop s ORDER BY s.saveDate ASC")
     List<Shop> findTop10BySaveDateAsc();
 
-    boolean existsByMemberAndShop(Member member, Shop shop);
     List<Shop> findByShopNameContaining(String searchShopName);
 }
