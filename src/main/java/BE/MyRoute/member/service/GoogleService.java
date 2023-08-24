@@ -41,22 +41,17 @@ public class GoogleService {
         JsonNode userResourceNode = getUserResource(accessToken, registrationId);
         log.info("userResourceNode = " + userResourceNode);
 
-        String id = userResourceNode.get("id").asText();
         String email = userResourceNode.get("email").asText();
         String nickname = userResourceNode.get("name").asText();
-        log.info("id = " + id, "email = " + email, "nickname = "  + nickname);
+        log.info("email = " + email, "nickname = " + nickname);
 
         Member member = Member.builder()
-                .snsId(Long.valueOf(id))
+                .nickname(nickname)
                 .email(email)
                 .role(Role.USER)
                 .build();
         memberRepository.save(member);
 
-//        // 사용자 정보를 세션에 저장
-//        UserDetails userDetails = new User(email, "", new ArrayList<>());
-//        Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
     private String getAccessToken(String authorizationCode, String registrationId) {

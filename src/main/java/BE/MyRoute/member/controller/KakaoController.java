@@ -2,21 +2,35 @@ package BE.MyRoute.member.controller;
 
 import BE.MyRoute.member.service.KakaoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/login/oauth2")
+@Slf4j
 public class KakaoController {
+
 
     private final KakaoService kakaoService;
 
-    @GetMapping("/kakao/callback")
-    public void kakaoCallback(@RequestParam String code) {
-        kakaoService.createKakaoUser(code);
+    @ResponseBody
+    @GetMapping("/login/oauth2/kakao")
+    public void login(@RequestParam String code) {
+        String access_Token = kakaoService.getAccessToken(code);
+        kakaoService.getUserInfo(access_Token);
     }
+
+
+    @RequestMapping(value="/logout")
+    public String logout(HttpSession session) {
+        kakaoService.kakaoLogout((String)session.getAttribute("access_Token"));
+        session.removeAttribute("access_Token");
+        session.removeAttribute("userId");
+        return "index";
+    }
+
+
 
 }
